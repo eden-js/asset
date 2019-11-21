@@ -1,16 +1,26 @@
 <media-img>
   <picture>
-    <source each={ (img, i) in opts.img } media="(max-width: { img.max })" srcset={ eden.get('media.url')(opts.image, img.label) } />
-    <img src={ eden.get('media.url')(opts.image, opts.label) || opts.fallback } class={ opts.class || opts.classes } />
+    <source each={ (img, i) in props.img } media="(max-width: { img.max })" srcset={ media.url(props.image, img.label) } />
+    <img src={ media.url(props.image, props.label) || props.fallback } class={ props.className } />
   </picture>
 
   <script>
     // import base
     import Base from '../js/base';
+    import media from 'asset/public/js/bootstrap';
 
     // export
     export default class MedaImg extends Base {
+      /**
+       * on before mount
+       */
+      onBeforeMount(...args) {
+        // run super
+        super.onBeforeMount(...args);
 
+        // add media
+        this.media = media;
+      }
     }
   </script>
 </media-img>

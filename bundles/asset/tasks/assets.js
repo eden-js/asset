@@ -1,7 +1,3 @@
-// Require dependencies
-const gulp   = require('gulp');
-const rename = require('gulp-rename');
-
 /**
  * Create Assets Task class
  *
@@ -23,29 +19,48 @@ class AssetsTask {
   }
 
   /**
+   * run in background
+   *
+   * @param {*} files 
+   */
+  async run(files) {
+    // run models in background
+    await this._runner.thread(this.thread, {
+      files,
+
+      appRoot : global.appRoot,
+    });
+
+    // reload js
+    this._runner.emit('scss', 'reload');
+  }
+
+  /**
    * Run Assets Task
    *
    * @param  {array} files
    *
    * @return {Promise}
    */
-  run(files) {
-    // Move images into single folder
-    return gulp.src(files)
-      .pipe(rename((filePath) => {
-        // Get amended
-        let amended = filePath.dirname.replace(/\\/g, '/').split('bundles/');
+  async thread(data) {
+    // glob
+    const fs   = require('fs-extra');
+    const glob = require('@edenjs/glob');
 
-        // Correct path
-        amended = amended.pop();
-        amended = amended.split('assets');
-        amended.shift();
-        amended = amended.join('assets');
+    // glob
+    for (const file of await glob(data.files)) {
+      // Get amended
+      let amended = file.replace(/\\/g, '/').split('bundles/');
 
-        // Alter amended
-        filePath.dirname = amended; // eslint-disable-line no-param-reassign
-      }))
-      .pipe(gulp.dest(`${global.appRoot}/data/www/public/assets`));
+      // Correct path
+      amended = amended.pop();
+      amended = amended.split('assets');
+      amended.shift();
+      amended = amended.join('assets');
+
+      // Alter amended
+      await fs.copy(file, `${data.appRoot}/data/www/public/assets/${amended}`);
+    }
   }
 
   /**
