@@ -59,7 +59,7 @@ class AssetsTask {
       amended = amended.join('assets');
 
       // Alter amended
-      await fs.copy(file, `${data.appRoot}/data/www/public/assets/${amended}`);
+      await fs.copy(file, `${data.appRoot}/www/public/assets/${amended}`);
     }
   }
 
