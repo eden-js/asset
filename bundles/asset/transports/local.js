@@ -45,10 +45,10 @@ class LocalTransport extends Base {
     asset.set('path', `${date}/${asset.get('hash')}`);
 
     // Ensure sync
-    await fs.ensureDir(`${global.appRoot}/data/www/public/media/${asset.get('path')}`);
+    await fs.ensureDir(`${global.appRoot}/www/public/media/${asset.get('path')}`);
 
     // Pushes asset
-    await fs.copy(tmp, `${global.appRoot}/data/www/public/media/${asset.get('path')}/${label ? `${label}.${asset.get(`thumbs.${label}.ext`)}` : `full.${asset.get('ext')}`}`);
+    await fs.copy(tmp, `${global.appRoot}/www/public/media/${asset.get('path')}/${label ? `${label}.${asset.get(`thumbs.${label}.ext`)}` : `full.${asset.get('ext')}`}`);
   }
 
   /**
@@ -65,7 +65,7 @@ class LocalTransport extends Base {
     asset.set('transport', 'local');
 
     // Pushes asset
-    await fs.copy(`${global.appRoot}/data/www/public/media/${asset.get('path')}/${label ? `${label}.${asset.get(`thumbs.${label}.ext`)}` : `full.${asset.get('ext')}`}`, tmp);
+    await fs.copy(`${global.appRoot}/www/public/media/${asset.get('path')}/${label ? `${label}.${asset.get(`thumbs.${label}.ext`)}` : `full.${asset.get('ext')}`}`, tmp);
   }
 
   /**
@@ -78,12 +78,12 @@ class LocalTransport extends Base {
    */
   async remove(asset, label) {
     // Pushes asset
-    await fs.unlink(`${global.appRoot}/data/www/public/media/${asset.get('path')}/${label ? `${label}.${asset.get(`thumbs.${label}.ext`)}` : `full.${asset.get('ext')}`}`);
+    await fs.unlink(`${global.appRoot}/www/public/media/${asset.get('path')}/${label ? `${label}.${asset.get(`thumbs.${label}.ext`)}` : `full.${asset.get('ext')}`}`);
 
     // Count files in directory
-    if (!(await fs.readdir(`${global.appRoot}/data/www/public/media/${asset.get('path')}`)).files.length) {
+    if (!(await fs.readdir(`${global.appRoot}/www/public/media/${asset.get('path')}`)).files.length) {
       // Remove directory
-      await fs.unlink(`${global.appRoot}/data/www/public/media/${asset.get('path')}`);
+      await fs.unlink(`${global.appRoot}/www/public/media/${asset.get('path')}`);
     }
   }
 }

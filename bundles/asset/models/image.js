@@ -86,7 +86,7 @@ class Image extends File {
   async thumb(name) {
     // Set local cache
     const thId = uuid();
-    const local = `${global.appRoot}/data/cache/tmp`;
+    const local = `${global.appRoot}/.edenjs/tmp`;
 
     // Ensure sync
     await fs.ensureDir(local);
