@@ -3,7 +3,7 @@
   "description": "",
   "version": "2.1.1",
   "dependencies": {
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "gulp": "^4.0.2",
     "gulp-rename": "^1.4.0",
     "path": "^0.12.7",
