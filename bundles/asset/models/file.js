@@ -206,25 +206,16 @@ class File extends Model {
    *
    * @async
    */
-  async sanitise(...args) {
-    // Check arguments
-    if (args && args.length) {
-      // Return sanitised with args
-      return await super.__sanitiseModel(...args);
-    }
-
-    // Return sanitised with default
-    return await super.__sanitiseModel('name', 'hash', 'created_at', {
-      field          : '_id',
-      default        : null,
-      sanitisedField : 'id',
-    }, {
-      field  : 'url',
-      custom : async () => {
-        // Return url
-        return await this.url();
-      },
-    });
+  async sanitise() {
+    // return sanitised
+    return {
+      id      : this.get('_id') ? this.get('_id').toString() : null,
+      url     : await this.url(),
+      name    : this.get('name'),
+      hash    : this.get('hash'),
+      created : this.get('created_at'),
+      updated : this.get('updated_at'),
+    };
   }
 }
 

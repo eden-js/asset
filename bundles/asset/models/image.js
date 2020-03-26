@@ -216,12 +216,6 @@ class Image extends File {
    * @async
    */
   async sanitise(...args) {
-    // Check arguments
-    if (args && args.length) {
-      // Return sanitised with args
-      return await super.__sanitiseModel(...args);
-    }
-
     // Get initial sanitised
     const sanitised = await super.sanitise(...args);
 
