@@ -18,8 +18,7 @@ const Image = model('image');
 /**
  * Create Asset Daemon class
  *
- * @compute
- * @express
+ * @cluster all
  */
 class AssetDaemon extends Daemon {
   /**

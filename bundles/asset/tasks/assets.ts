@@ -7,11 +7,11 @@ class AssetsTask {
   /**
    * Construct Assets Task class
    *
-   * @param {Loader} runner
+   * @param {Loader} cli
    */
-  constructor(runner) {
+  constructor(cli) {
     // Set private variables
-    this._runner = runner;
+    this.cli = cli;
 
     // Bind public methods
     this.run = this.run.bind(this);
@@ -25,14 +25,14 @@ class AssetsTask {
    */
   async run(files) {
     // run models in background
-    await this._runner.thread(this.thread, {
+    await this.cli.thread(this.thread, {
       files,
 
       appRoot : global.appRoot,
     });
 
     // reload js
-    this._runner.emit('scss', 'reload');
+    this.cli.emit('scss', 'reload');
   }
 
   /**
@@ -70,9 +70,7 @@ class AssetsTask {
    */
   watch() {
     // Return files
-    return [
-      'public/assets/**/*',
-    ];
+    return '/public/assets/**/*';
   }
 }
 
