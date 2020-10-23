@@ -33,6 +33,9 @@ class AssetsTask {
 
     // reload js
     this.cli.emit('scss', 'reload');
+
+    // return success
+    return `assets linked!`;
   }
 
   /**

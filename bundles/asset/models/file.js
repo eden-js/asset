@@ -175,7 +175,7 @@ class File extends Model {
    */
   url() {
     // Return asset transport url
-    return this.transport().url(this);
+    return this.transport() ? this.transport().url(this) : null;
   }
 
   /**

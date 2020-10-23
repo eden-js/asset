@@ -225,7 +225,7 @@ class Image extends File {
     // Get url for thumbs
     for (const thumb of Object.values(sanitised.thumbs)) {
       // Set thumb url
-      thumb.url = await this.transport().url(this, (thumb.name || thumb.label));
+      thumb.url = this.transport() ? await this.transport().url(this, (thumb.name || thumb.label)) : null;
 
       // delete meta
       delete thumb.meta;
