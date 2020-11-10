@@ -27,7 +27,7 @@ class Media {
     if (!image) return null;
 
     // Build url
-    return label && image.thumbs[label] ? image.thumbs[label].url : image.url;
+    return label && image.thumbs && image.thumbs[label] ? image.thumbs[label].url : image.url;
   }
 }
 
