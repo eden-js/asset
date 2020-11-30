@@ -1,7 +1,7 @@
 /* eslint-disable no-empty */
 // Require dependencies
 const fs    = require('fs-extra');
-const uuid  = require('uuid');
+const uuid  = require('uuid').v4;
 const sharp = require('sharp');
 
 // Require local class dependencies

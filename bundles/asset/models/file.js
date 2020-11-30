@@ -1,7 +1,7 @@
 // Require dependencies
 const fs      = require('fs-extra');
 const url     = require('url');
-const uuid    = require('uuid');
+const uuid    = require('uuid').v4;
 const path    = require('path');
 const config  = require('config');
 const request = require('request');
